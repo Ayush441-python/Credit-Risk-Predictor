@@ -1,0 +1,1 @@
+### The Credit Risk Predictor is a Machine Learning project that predicts whether a loan applicant is likely to be a low risk or high risk borrower based on their financial and personal information. This helps financial institutions make better loan approval decisions and reduce default risk.
