@@ -1,35 +1,36 @@
-import sys 
+import sys
 from src.logger import logging
 
-def error_message_details(error,error_details:sys):
-    _,_,exc_tb= error_details.exc_info()
-    file_name=exc_tb.tb_frame.f_code.co_filename
-    error_message="Error occured in python script name [{0}] line number [{1}] error message[{2}]".format
-    (file_name,exc_tb.tb_lineno,str(error))
+
+def error_message_details(error, error_details: sys):
+    """
+    Returns a detailed error message containing
+    filename, line number, and the original exception.
+    """
+    _, _, exc_tb = error_details.exc_info()
+
+    file_name = exc_tb.tb_frame.f_code.co_filename
+    line_number = exc_tb.tb_lineno
+
+    error_message = (
+        f"Error occurred in python script: [{file_name}] "
+        f"at line number: [{line_number}] "
+        f"with error message: [{str(error)}]"
+    )
 
     return error_message
 
-'''
-        sys.exc_info() tells you What error happened, and where it happened.
-
-        tb_frame → current stack frame
-        f_code → code object
-        co_filename → file name
-'''
-
-    
 
 class CustomException(Exception):
-    def __init__(self,error_message,error_details:sys):
-        super().__init__(error_message)
+    def __init__(self, error_message, error_details: sys):
+        super().__init__(str(error_message))
+
         self.error_message = error_message_details(
-    error_message,
-    error_details
-)
+            error_message,
+            error_details
+        )
+
+        logging.error(self.error_message)
+
     def __str__(self):
         return self.error_message
-    
-
-
-        
-
