@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+
+  credit-risk-app:
+    build: .
+    container_name: credit-risk-predictor
+
+    ports:
+      - "8501:8501"
+
+    restart: unless-stopped
+
+    volumes:
+      - ./artifacts:/app/artifacts
+
+    environment:
+      PYTHONUNBUFFERED: "1"
